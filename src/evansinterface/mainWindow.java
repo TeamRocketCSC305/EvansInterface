@@ -41,8 +41,7 @@ private final CsvFileReader fileReader;
     mainWindow() throws FileNotFoundException {
         initComponents();
         
-//        fileSelect = new JFileChooser();
-//        fileName = openFile();
+        fileName = openFile();
         
         fileReader = new CsvFileReader();
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
@@ -76,6 +75,7 @@ private final CsvFileReader fileReader;
         jDialog1 = new javax.swing.JDialog();
         jMenuItem1 = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        fileSelect = new javax.swing.JFileChooser();
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -126,6 +126,10 @@ private final CsvFileReader fileReader;
         );
 
         jMenuItem1.setText("jMenuItem1");
+
+        fileSelect.setCurrentDirectory(null);
+        fileSelect.setDialogTitle("Select CSV Template File");
+        fileSelect.setFileFilter(new FileNameExtensionFilter("CSV FILES", "csv", "commaSeperatedValue"););
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -496,6 +500,129 @@ private final CsvFileReader fileReader;
     int x = 1;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        writeOut();
+    
+        //}
+// System.out.println("I guess this printed?");
+  //  System.out.println("\n");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        File happyFile = new File(stuff+".csv");
+        try {
+              PrintWriter outputStream = new PrintWriter(happyFile);
+              outputStream.println("");
+              outputStream.close();
+              
+              //  printWriter.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new mainWindow().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private String openFile(){
+        int returnVal = fileSelect.showOpenDialog(this);
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+        File file = fileSelect.getSelectedFile();
+        try {
+            return file.getAbsolutePath();
+        } catch (Exception ex) {
+          System.out.println("problem accessing file"+file.getAbsolutePath());
+          return "";
+        }
+    } else {
+        System.out.println("File access cancelled by user.");
+        return "";
+    }
+    }
+    
+    private String readFile( String file ){
+        try{
+    BufferedReader reader = new BufferedReader( new FileReader (file));
+    String         line = null;
+    StringBuilder  stringBuilder = new StringBuilder();
+    String         ls = System.getProperty("line.separator");
+
+    while( ( line = reader.readLine() ) != null ) {
+        stringBuilder.append( line );
+        stringBuilder.append( ls );
+    }
+    
+    String things = stringBuilder.toString();
+    return things;
+    }
+    catch (Exception e){
+        return "";
+    }
+    }
+    
+    private String checkNA(String inString){
+        if(inString.equals("-----"))
+            return "";
+        else return inString;
+    }
+    
+    
+    private boolean isNum(String str){
+        try{
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe){
+            return false;
+        }
+        return true;
+        
+    }
+    
+    private void writeOut(){
         double k = Double.parseDouble(jTextField1.getText());
         double b = k-1;
         
@@ -793,132 +920,12 @@ private final CsvFileReader fileReader;
                  }
             
                }
-    
-        //}
-// System.out.println("I guess this printed?");
-  //  System.out.println("\n");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        File happyFile = new File(stuff+".csv");
-        try {
-              PrintWriter outputStream = new PrintWriter(happyFile);
-              outputStream.println("");
-              outputStream.close();
-              
-              //  printWriter.flush();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new mainWindow().setVisible(true);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
-    
-    private String openFile(){
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv", "commaSeperatedValue");
-        fileSelect.setFileFilter(filter);
-        int returnVal = fileSelect.showOpenDialog(this);
-    if (returnVal == JFileChooser.APPROVE_OPTION) {
-        File file = fileSelect.getSelectedFile();
-        try {
-            return file.getAbsolutePath();
-        } catch (Exception ex) {
-          System.out.println("problem accessing file"+file.getAbsolutePath());
-          return "";
-        }
-    } else {
-        System.out.println("File access cancelled by user.");
-        return "";
-    }
-    }
-    
-    private String readFile( String file ){
-        try{
-    BufferedReader reader = new BufferedReader( new FileReader (file));
-    String         line = null;
-    StringBuilder  stringBuilder = new StringBuilder();
-    String         ls = System.getProperty("line.separator");
-
-    while( ( line = reader.readLine() ) != null ) {
-        stringBuilder.append( line );
-        stringBuilder.append( ls );
-    }
-    
-    String things = stringBuilder.toString();
-    return things;
-    }
-    catch (Exception e){
-        return "";
-    }
-    }
-    
-    private String checkNA(String inString){
-        if(inString.equals("-----"))
-            return "";
-        else return inString;
-    }
-    
-    
-    private boolean isNum(String str){
-        try{
-            double d = Double.parseDouble(str);
-        }
-        catch(NumberFormatException nfe){
-            return false;
-        }
-        return true;
-        
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JFileChooser fileSelect;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox2;
@@ -953,7 +960,6 @@ private final CsvFileReader fileReader;
 private CsvFileWriter writer;
 private String inString1;
 private String instring2;
-private JFileChooser fileSelect;
 private String stuff;
 private String fileName;
 
