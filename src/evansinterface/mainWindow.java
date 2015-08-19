@@ -41,8 +41,8 @@ private final CsvFileReader fileReader;
     mainWindow() throws FileNotFoundException {
         initComponents();
         
-        fileSelect = new JFileChooser();
-        fileName = openFile();
+//        fileSelect = new JFileChooser();
+//        fileName = openFile();
         
         fileReader = new CsvFileReader();
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
