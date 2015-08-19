@@ -13,6 +13,10 @@ import java.util.logging.Logger;
  * @author Nate Hindman and Dakota Dolde
  */
 public class CsvFileReader {
+    
+    public CsvFileReader(File fileIn){
+        file = fileIn;
+    }
 
     /**
      * @param args the command line arguments
@@ -36,11 +40,8 @@ public class CsvFileReader {
                 case CATHODE:
                     arraySelected = 2;
                     break;
-                case GLASSING:
-                    arraySelected = 3;
-                    break;
                 case TANTALUM:
-                    arraySelected = 4;
+                    arraySelected = 3;
                     break;
                 default:
                     arraySelected = 0;
@@ -50,13 +51,8 @@ public class CsvFileReader {
         }
         
        
-   public static  String fileName = "Kit Serial Numbers TEMPLATE.csv";
    
         private static void readString() throws FileNotFoundException{
-            
-           
-           
-            File file = new File(fileName);
             
          if(file.exists() != true){
              try{
@@ -79,7 +75,7 @@ public class CsvFileReader {
                 while(inputStream.hasNext()){
                     
                     String data = inputStream.next();
-                    if (line > 44){
+                    if (line > 2){
                         rowArray = new String[]{"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
                         for(int i = 0; i < data.split(",").length; i++){
                             rowArray[i] = data.split(",")[i];
@@ -90,13 +86,11 @@ public class CsvFileReader {
                         System.out.print("\n");
                         checkDubsAndAdd(2, 0);
                         System.out.println("Added value for LOTNUM");
-                        checkDubsAndAdd(4, 1);
+                        checkDubsAndAdd(7, 1);
                         System.out.println("Added value for ANODE");
-                        checkDubsAndAdd(5, 2);
+                        checkDubsAndAdd(8, 2);
                         System.out.println("Added value for CATHODE");
-                        checkDubsAndAdd(6, 3);
-                        System.out.println("Added value for GLASSING");
-                        checkDubsAndAdd(7, 4);
+                        checkDubsAndAdd(10, 3);
                         System.out.println("Added value for TANTALUM");
                     }
                     line++;
@@ -124,6 +118,7 @@ public class CsvFileReader {
         
                    private static String[] rowArray;
                    private static String[][] values;
+                   private static File file;
     }
     
 
