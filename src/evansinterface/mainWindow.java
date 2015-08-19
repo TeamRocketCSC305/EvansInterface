@@ -517,14 +517,30 @@ private final CsvFileReader fileReader;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //File happyFile = new File(stuff+".csv");
+        File happyFile = new File(stuff+".csv");
         try {
-              PrintWriter outputStream = new PrintWriter(templateFile);
+              PrintWriter outputStream = new PrintWriter(happyFile);
               outputStream.println("");
               outputStream.close();
               
               //  printWriter.flush();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       String whatever = readFile(stuff+".csv");
+       System.out.println(whatever);
+       try {
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                BufferedWriter buffer = new BufferedWriter(fileWriter);
+                PrintWriter printWriter = new PrintWriter(buffer);
+                //String stringthing = jTextField4.getText().toString();
+                whatever = checkNA(noteText);
+                printWriter.printf("%s",noteText);
+                printWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("WOO");
             }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -627,8 +643,8 @@ private final CsvFileReader fileReader;
         double b = k-1;
         
             
-            String lol = jTextField1.getText();
-            String wat= jTextField4.getText();
+            String duplicateText = jTextField1.getText();
+            String noteText= jTextField4.getText();
             stuff = jComboBox2.getSelectedItem().toString();
             double s = Double.parseDouble(jTextField2.getText());
             double g = s-1;
@@ -753,8 +769,8 @@ private final CsvFileReader fileReader;
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jTextField4.getText().toString();
-                stringthing = checkNA(wat);
-                printWriter.printf( ",,%s",wat);
+                stringthing = checkNA(noteText);
+                printWriter.printf(",,%s",noteText);
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -895,8 +911,8 @@ private final CsvFileReader fileReader;
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jTextField4.getText().toString();
-                stringthing = checkNA(wat);
-                printWriter.printf( ",,%s",wat);
+                stringthing = checkNA(noteText);
+                printWriter.printf(",,%s",noteText);
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -962,6 +978,8 @@ private String inString1;
 private String instring2;
 private String stuff;
 private File templateFile;
+private String noteText;
+private String duplicateText;
 
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
