@@ -41,7 +41,7 @@ private final CsvFileReader fileReader;
     mainWindow() throws FileNotFoundException {
         initComponents();
         
-        fileName = openFile();
+        templateFile = openFile();
         
         fileReader = new CsvFileReader();
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
@@ -440,13 +440,13 @@ private final CsvFileReader fileReader;
        String Teflon = "Teflon Spacer Lot";
        String Comments = "Comments";
        
-     String stuff = jComboBox2.getSelectedItem().toString();
+     //String stuff = jComboBox2.getSelectedItem().toString();
      
-     File happyFile = new File("z:\\EvansInterface_Beta\\"+stuff+".csv");
+     //File happyFile = new File("z:\\EvansInterface_Beta\\" + stuff + ".csv");
     try {
         if(stuff!="-----"){ // so the user can't screw up and make -----.csv by accident
-            if(happyFile.exists() != true){  //if happyFile doesn't exist create a file with a template
-            FileWriter fileWriter = new FileWriter(happyFile, true); 
+            if(templateFile.exists() != true){  //if templateFile doesn't exist create a file with a template
+            FileWriter fileWriter = new FileWriter(templateFile, true); 
             BufferedWriter buffer = new BufferedWriter(fileWriter);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.printf( "%s\n,%s,,,,,,,%s,,,,%s\n,%s,%s,%s,,,,%s,%s,%s,%s,,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",stringthing,cantu,hoagland,rucker,Serial,assembly,part,anode,cathode,header,tantalum,Cap,ESR,Leakage,Assemblylotselected,Anode1,Anode2,Anode3,Anode4,Anode5,Cathodelot,TeflonSpacer1,TeflonSpacer2,TeflonSpacer3,HeaderGlass,Tantalumlot,Teflon,Comments);
@@ -516,9 +516,9 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        File happyFile = new File(stuff+".csv");
+        //File happyFile = new File(stuff+".csv");
         try {
-              PrintWriter outputStream = new PrintWriter(happyFile);
+              PrintWriter outputStream = new PrintWriter(templateFile);
               outputStream.println("");
               outputStream.close();
               
@@ -568,19 +568,19 @@ private final CsvFileReader fileReader;
         });
     }
     
-    private String openFile(){
+    private File openFile(){
         int returnVal = fileSelect.showOpenDialog(this);
     if (returnVal == JFileChooser.APPROVE_OPTION) {
         File file = fileSelect.getSelectedFile();
         try {
-            return file.getAbsolutePath();
+            return file;
         } catch (Exception ex) {
           System.out.println("problem accessing file"+file.getAbsolutePath());
-          return "";
+          return null;
         }
     } else {
         System.out.println("File access cancelled by user.");
-        return "";
+        return null;
     }
     }
     
@@ -634,8 +634,8 @@ private final CsvFileReader fileReader;
             double g = s-1;
             jProgressBar1.setValue(x);
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 printWriter.printf( "\n");
@@ -649,8 +649,8 @@ private final CsvFileReader fileReader;
             }
 
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
                 String stringthing = jComboBox2.getSelectedItem().toString();
@@ -661,8 +661,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox4.getSelectedItem().toString();
@@ -673,8 +673,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox5.getSelectedItem().toString();
@@ -685,8 +685,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox6.getSelectedItem().toString();
@@ -697,8 +697,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox7.getSelectedItem().toString();
@@ -709,8 +709,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox8.getSelectedItem().toString();
@@ -722,8 +722,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox9.getSelectedItem().toString();
@@ -736,8 +736,8 @@ private final CsvFileReader fileReader;
             }
             
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox3.getSelectedItem().toString();
@@ -748,8 +748,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jTextField4.getText().toString();
@@ -778,8 +778,8 @@ private final CsvFileReader fileReader;
                      
             jProgressBar1.setValue(x);
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 printWriter.printf( "\n");
@@ -793,8 +793,8 @@ private final CsvFileReader fileReader;
             }
 
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
                 String stringthing = jComboBox2.getSelectedItem().toString();
@@ -805,8 +805,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox4.getSelectedItem().toString();
@@ -817,8 +817,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox5.getSelectedItem().toString();
@@ -829,8 +829,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox6.getSelectedItem().toString();
@@ -841,8 +841,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox7.getSelectedItem().toString();
@@ -853,8 +853,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox8.getSelectedItem().toString();
@@ -865,8 +865,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox9.getSelectedItem().toString();
@@ -878,8 +878,8 @@ private final CsvFileReader fileReader;
             }
           
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jComboBox3.getSelectedItem().toString();
@@ -890,8 +890,8 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                //File happyFile = new File(stuff+".csv");
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 String stringthing = jTextField4.getText().toString();
@@ -961,7 +961,7 @@ private CsvFileWriter writer;
 private String inString1;
 private String instring2;
 private String stuff;
-private String fileName;
+private File templateFile;
 
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
