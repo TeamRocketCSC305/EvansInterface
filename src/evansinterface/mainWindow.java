@@ -43,7 +43,7 @@ private final CsvFileReader fileReader;
         
         templateFile = openFile();
         
-        fileReader = new CsvFileReader();
+        fileReader = new CsvFileReader(templateFile);
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
         jComboBox3.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.TANTALUM)));
         jComboBox4.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
