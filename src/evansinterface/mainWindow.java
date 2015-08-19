@@ -41,6 +41,9 @@ private final CsvFileReader fileReader;
     mainWindow() throws FileNotFoundException {
         initComponents();
         
+        fileSelect = new JFileChooser();
+        fileName = openFile();
+        
         fileReader = new CsvFileReader();
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
         jComboBox2.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.LOTNUM)));
@@ -850,18 +853,31 @@ private final CsvFileReader fileReader;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                fileSelect = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("csv");
-                fileSelect.setFileFilter(filter);
-                fileSelect.setVisible(true);
                 try {
-                    
                     new mainWindow().setVisible(true);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+    }
+    
+    private String openFile(){
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv", "commaSeperatedValue");
+        fileSelect.setFileFilter(filter);
+        int returnVal = fileSelect.showOpenDialog(this);
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+        File file = fileSelect.getSelectedFile();
+        try {
+            return file.getAbsolutePath();
+        } catch (Exception ex) {
+          System.out.println("problem accessing file"+file.getAbsolutePath());
+          return "";
+        }
+    } else {
+        System.out.println("File access cancelled by user.");
+        return "";
+    }
     }
     
     private String readFile( String file ){
@@ -939,8 +955,9 @@ private final CsvFileReader fileReader;
 private CsvFileWriter writer;
 private String inString1;
 private String instring2;
-private static JFileChooser fileSelect;
+private JFileChooser fileSelect;
 private String stuff;
+private String fileName;
 
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
