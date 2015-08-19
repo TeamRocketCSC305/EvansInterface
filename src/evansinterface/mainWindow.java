@@ -45,7 +45,6 @@ private final CsvFileReader fileReader;
         
         fileReader = new CsvFileReader();
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
-        jComboBox2.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.LOTNUM)));
         jComboBox3.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.TANTALUM)));
         jComboBox4.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
         jComboBox5.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
@@ -559,7 +558,6 @@ private final CsvFileReader fileReader;
             
             String duplicateText = jTextField1.getText();
             String noteText= jTextField4.getText();
-            stuff = jComboBox2.getSelectedItem().toString();
             double s = Double.parseDouble(jTextField2.getText());
             double g = s-1;
             jProgressBar1.setValue(x);
@@ -583,9 +581,7 @@ private final CsvFileReader fileReader;
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
-                String stringthing = jComboBox2.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",,,,,,,,,,,,%s",stringthing);
+                printWriter.printf( ",,,,,,,,,,,,%s");
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -727,9 +723,7 @@ private final CsvFileReader fileReader;
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
-                String stringthing = jComboBox2.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",,,,,,,,,,,,%s",stringthing);
+                printWriter.printf( ",,,,,,,,,,,,%s");
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
