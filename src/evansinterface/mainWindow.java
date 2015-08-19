@@ -94,7 +94,7 @@ private final CsvFileReader fileReader;
         jLabel10 = new javax.swing.JLabel();
         jComboBox9 = new javax.swing.JComboBox();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jButton1 = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -227,10 +227,10 @@ private final CsvFileReader fileReader;
         jProgressBar1.setString("0/40");
         jProgressBar1.setStringPainted(true);
 
-        jButton1.setText("Next");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nextButtonActionPerformed(evt);
             }
         });
 
@@ -297,7 +297,7 @@ private final CsvFileReader fileReader;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
+                                .addComponent(nextButton)))
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11))
                     .addGroup(layout.createSequentialGroup()
@@ -362,7 +362,7 @@ private final CsvFileReader fileReader;
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(backButton))
                 .addGap(15, 15, 15)
@@ -412,14 +412,14 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jComboBox9ActionPerformed
     
     int x = 1;
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
 
         writeOut();
     
         //}
 // System.out.println("I guess this printed?");
   //  System.out.println("\n");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_nextButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -581,7 +581,7 @@ private final CsvFileReader fileReader;
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.printf( ",,,,,,,,,,,,%s");
+                printWriter.printf( ",,,,,,,,,,,,%s","");
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -678,7 +678,7 @@ private final CsvFileReader fileReader;
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jTextField4.getText().toString();
+                String stringthing = jTextField4.getText();
                 stringthing = checkNA(noteText);
                 printWriter.printf(",,%s",noteText);
                 printWriter.close();
@@ -691,7 +691,7 @@ private final CsvFileReader fileReader;
            
              
             if(x == 39){
-                jButton1.setText("Finish");
+                nextButton.setText("Finish");
                 x++;
             }
             else if(s>40)
@@ -723,7 +723,7 @@ private final CsvFileReader fileReader;
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.printf( ",,,,,,,,,,,,%s");
+                printWriter.printf( ",,,,,,,,,,,,%s","");
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -818,7 +818,7 @@ private final CsvFileReader fileReader;
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jTextField4.getText().toString();
+                String stringthing = jTextField4.getText();
                 stringthing = checkNA(noteText);
                 printWriter.printf(",,%s",noteText);
                 printWriter.close();
@@ -832,7 +832,7 @@ private final CsvFileReader fileReader;
             
              
             if(x == 39){
-                jButton1.setText("Finish");
+                nextButton.setText("Finish");
                 x++;
                // System.exit(0);
             }
@@ -851,7 +851,6 @@ private final CsvFileReader fileReader;
     private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JFileChooser fileSelect;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
@@ -877,6 +876,7 @@ private final CsvFileReader fileReader;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton nextButton;
     // End of variables declaration//GEN-END:variables
 
 private CsvFileWriter writer;
