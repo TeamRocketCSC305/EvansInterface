@@ -815,7 +815,7 @@ private final CsvFileReader fileReader;
 
   String things = stringBuilder.toString();
     return things;
-}        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
