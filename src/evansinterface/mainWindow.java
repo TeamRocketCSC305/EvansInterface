@@ -99,7 +99,7 @@ private final CsvFileReader fileReader;
         jTextField1 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -251,10 +251,10 @@ private final CsvFileReader fileReader;
 
         jLabel11.setText("Notes");
 
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -294,7 +294,7 @@ private final CsvFileReader fileReader;
                                     .addComponent(jComboBox9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(backButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -365,7 +365,7 @@ private final CsvFileReader fileReader;
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton2))
+                    .addComponent(backButton))
                 .addGap(15, 15, 15)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -430,7 +430,7 @@ private final CsvFileReader fileReader;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //File happyFile = new File(stuff+".csv");
         try {
               PrintWriter outputStream = new PrintWriter(templateFile);
@@ -442,24 +442,21 @@ private final CsvFileReader fileReader;
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
         
-       String whatever = readFile(templateFile);
-       System.out.println(whatever);
+       String oldText = readFile(templateFile);
+       System.out.println(oldText);
        
        try {
                 //File happyFile = new File(stuff+".csv");
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
-                //String stringthing = jTextField4.getText().toString();
-                if(noteText != null){
-                    printWriter.printf("%s",noteText);
-                }
+                printWriter.print(oldText);
                 printWriter.close();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("WOO");
             }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -857,10 +854,10 @@ private final CsvFileReader fileReader;
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JFileChooser fileSelect;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
