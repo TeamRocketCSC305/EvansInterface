@@ -808,15 +808,13 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        File happyFile = new File(stuff+".csv");
         try {
-                File happyFile = new File(stuff +".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox3.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",,,,,%s",stringthing);
-                printWriter.flush();
+              PrintWriter outputStream = new PrintWriter(happyFile);
+              outputStream.println("");
+              outputStream.close();
+              
+              //  printWriter.flush();
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
