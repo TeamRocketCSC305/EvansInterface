@@ -517,9 +517,8 @@ private final CsvFileReader fileReader;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //File happyFile = new File(stuff+".csv");
-        File happyFile = new File(stuff+".csv");
         try {
-              PrintWriter outputStream = new PrintWriter(happyFile);
+              PrintWriter outputStream = new PrintWriter(templateFile);
               outputStream.println("");
               outputStream.close();
               
@@ -531,7 +530,7 @@ private final CsvFileReader fileReader;
        System.out.println(whatever);
        try {
                 //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 PrintWriter printWriter = new PrintWriter(buffer);
                 //String stringthing = jTextField4.getText().toString();
