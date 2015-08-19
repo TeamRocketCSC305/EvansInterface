@@ -44,7 +44,7 @@
         <Property name="currentDirectory" type="java.io.File" value="null"/>
         <Property name="dialogTitle" type="java.lang.String" value="Select CSV Template File"/>
         <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new FileNameExtensionFilter(&quot;CSV FILES&quot;, &quot;csv&quot;, &quot;commaSeperatedValue&quot;);" type="code"/>
+          <Connection code="new FileNameExtensionFilter(&quot;CSV FILES&quot;, &quot;csv&quot;, &quot;commaSeperatedValue&quot;)" type="code"/>
         </Property>
       </Properties>
     </Component>

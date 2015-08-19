@@ -129,7 +129,7 @@ private final CsvFileReader fileReader;
 
         fileSelect.setCurrentDirectory(null);
         fileSelect.setDialogTitle("Select CSV Template File");
-        fileSelect.setFileFilter(new FileNameExtensionFilter("CSV FILES", "csv", "commaSeperatedValue"););
+        fileSelect.setFileFilter(new FileNameExtensionFilter("CSV FILES", "csv", "commaSeperatedValue"));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
