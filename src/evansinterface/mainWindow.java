@@ -526,8 +526,10 @@ private final CsvFileReader fileReader;
             } catch (IOException ex) {
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
        String whatever = readFile(templateFile);
        System.out.println(whatever);
+       
        try {
                 //File happyFile = new File(stuff+".csv");
                 FileWriter  fileWriter = new FileWriter(templateFile, true);
@@ -599,7 +601,7 @@ private final CsvFileReader fileReader;
     }
     }
     
-    private String readFile( String file ){
+    private String readFile( File file ){
         try{
     BufferedReader reader = new BufferedReader( new FileReader (file));
     String         line = null;
