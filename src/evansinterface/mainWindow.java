@@ -18,6 +18,8 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 
@@ -788,6 +790,7 @@ private final CsvFileReader fileReader;
                  }
             
                }
+    
         //}
 // System.out.println("I guess this printed?");
   //  System.out.println("\n");
@@ -802,20 +805,7 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-  private String readFile( String file ) throws IOException {
-    BufferedReader reader = new BufferedReader( new FileReader (file));
-    String         line = null;
-    StringBuilder  stringBuilder = new StringBuilder();
-    String         ls = System.getProperty("line.separator");
-
-    while( ( line = reader.readLine() ) != null ) {
-        stringBuilder.append( line );
-        stringBuilder.append( ls );
-    }
-
-  String things = stringBuilder.toString();
-    return things;
-        // TODO add your handling code here:
+        readFile("ye");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -849,7 +839,12 @@ private final CsvFileReader fileReader;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                fileSelect = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("csv");
+                fileSelect.setFileFilter(filter);
+                fileSelect.setVisible(true);
                 try {
+                    
                     new mainWindow().setVisible(true);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -858,11 +853,32 @@ private final CsvFileReader fileReader;
         });
     }
     
+    private String readFile( String file ){
+        try{
+    BufferedReader reader = new BufferedReader( new FileReader (file));
+    String         line = null;
+    StringBuilder  stringBuilder = new StringBuilder();
+    String         ls = System.getProperty("line.separator");
+
+    while( ( line = reader.readLine() ) != null ) {
+        stringBuilder.append( line );
+        stringBuilder.append( ls );
+    }
+    
+    String things = stringBuilder.toString();
+    return things;
+    }
+    catch (Exception e){
+        return "";
+    }
+    }
+    
     private String checkNA(String inString){
         if(inString.equals("-----"))
             return "";
         else return inString;
     }
+    
     
     private boolean isNum(String str){
         try{
@@ -911,6 +927,7 @@ private final CsvFileReader fileReader;
 private CsvFileWriter writer;
 private String inString1;
 private String instring2;
+private static JFileChooser fileSelect;
 
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
