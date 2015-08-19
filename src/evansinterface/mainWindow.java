@@ -499,7 +499,7 @@ private final CsvFileReader fileReader;
             
             String lol = jTextField1.getText();
             String wat= jTextField4.getText();
-            String stuff = jComboBox2.getSelectedItem().toString();
+            stuff = jComboBox2.getSelectedItem().toString();
             double s = Double.parseDouble(jTextField2.getText());
             double g = s-1;
             jProgressBar1.setValue(x);
@@ -805,7 +805,18 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        readFile("ye");
+        try {
+                File happyFile = new File(stuff +".csv");
+                FileWriter  fileWriter = new FileWriter(happyFile, true);
+                BufferedWriter buffer = new BufferedWriter(fileWriter);
+                PrintWriter printWriter = new PrintWriter(buffer);
+                String stringthing = jComboBox3.getSelectedItem().toString();
+                stringthing = checkNA(stringthing);
+                printWriter.printf( ",,,,,%s",stringthing);
+                printWriter.flush();
+            } catch (IOException ex) {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -890,6 +901,7 @@ private final CsvFileReader fileReader;
         return true;
         
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -928,6 +940,7 @@ private CsvFileWriter writer;
 private String inString1;
 private String instring2;
 private static JFileChooser fileSelect;
+private String stuff;
 
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
