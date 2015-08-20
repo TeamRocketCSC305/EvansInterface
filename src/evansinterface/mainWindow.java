@@ -585,8 +585,9 @@ private final CsvFileReader fileReader;
             
             output.append(newOut);
             
-            jTextField1.setText(String.valueOf(--loops));
-            jTextField2.setText(String.format("%0.f", ++currentItem));
+            jTextField1.setText(String.valueOf(--loops).indexOf(".") < 0 ? String.valueOf(loops) : String.valueOf(loops).replaceAll("0*$", "").replaceAll("\\.$", ""));
+            currentItem++;
+            jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
             jProgressBar1.setValue(++progress);
             jProgressBar1.setString(progress + "/40");
         }
