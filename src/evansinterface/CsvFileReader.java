@@ -31,17 +31,14 @@ public class CsvFileReader {
             readString();
             int arraySelected;
             switch(item){
-                case LOTNUM:
+                case ANODE:
                     arraySelected = 0;
                     break;
-                case ANODE:
+                case CATHODE:
                     arraySelected = 1;
                     break;
-                case CATHODE:
-                    arraySelected = 2;
-                    break;
                 case TANTALUM:
-                    arraySelected = 3;
+                    arraySelected = 2;
                     break;
                 default:
                     arraySelected = 0;
@@ -65,34 +62,50 @@ public class CsvFileReader {
             
                 
             }
-            values = new String[5][];
+            values = new String[3][];
             int line = 0;
             for(int i = 0; i < values.length; i++){
                 values[i] = new String[]{"-----"};
             }
-             try (Scanner inputStream = new Scanner(file)) {
+            try (Scanner inputStream = new Scanner(file)) {
                  
-                while(inputStream.hasNext()){
+                String data;
+                boolean done = false;
+                 
+                while(inputStream.hasNext() && !done){
                     
-                    String data = inputStream.next();
-                    if (line > 2){
-                        rowArray = new String[]{"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""};
+                    data = inputStream.nextLine();
+                    System.out.println(data);
+                    
+                    if (data.contains("Serial")){
+                        while(inputStream.hasNext() && !done){
+                        data = inputStream.nextLine();
+                        System.out.println(data);
+                        if(data.contains("Entered")){
+                            System.out.println("Done Import");
+                            done = true;
+                        }
+                        if(!done){
+                        rowArray = new String[]{"","","","","","","","","","","","","","","","","","","","","","","","","","",
+                            "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
+                            "","","","","","","","","","","","","","","","","","",""};
                         for(int i = 0; i < data.split(",").length; i++){
                             rowArray[i] = data.split(",")[i];
                         }
-//                        for(String str : rowArray){ 
-//                            System.out.print(str + "|   ");
-//                        }
                         System.out.print("\n");
-                        checkDubsAndAdd(2, 0);
-                        System.out.println("Added value for LOTNUM");
-                        checkDubsAndAdd(7, 1);
-                        System.out.println("Added value for ANODE");
-                        checkDubsAndAdd(8, 2);
-                        System.out.println("Added value for CATHODE");
-                        checkDubsAndAdd(10, 3);
-                        System.out.println("Added value for TANTALUM");
+                        checkDubsAndAdd(10, 0);
+                        System.out.println("Checked value for ANODE");
+                        checkDubsAndAdd(15, 1);
+                        System.out.println("Checked value for CATHODE");
+                        checkDubsAndAdd(17, 2);
+                        System.out.println("Checked value for TANTALUM");
+                        
+                        line++;
+                        System.out.println(String.valueOf(line));
+                        }
+                        }
                     }
+                    
                     line++;
                     System.out.println(String.valueOf(line));
                     
