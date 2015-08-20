@@ -653,7 +653,6 @@ private final CsvFileReader fileReader;
     private javax.swing.JButton nextButton;
     // End of variables declaration//GEN-END:variables
 
-private CsvFileWriter writer;
 private String inString1;
 private String instring2;
 private String stuff;
