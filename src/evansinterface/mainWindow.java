@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -377,40 +378,37 @@ private final CsvFileReader fileReader;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
- // double s = Double.parseDouble(jTextField2.getText());
-//double x= jTextField2.getText().toDouble();    // System.out.println(jTextField2.gettext().toString()); // public CsvFileWriter.getText(jComboBox2);  // TODO add your handling code here:
+ 
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-      System.out.println(jComboBox3.getSelectedItem().toString());   // TODO add your handling code here:
+      
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-  System.out.println(jComboBox4.getSelectedItem().toString());// BoxItems.ANODE.getText(); 
-  //System.out.println(BoxItems.ANODE);// TODO add your handling code here:
+  
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
-       System.out.println(jComboBox7.getSelectedItem().toString());  // TODO add your handling code here:
+       
     }//GEN-LAST:event_jComboBox7ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-       System.out.println(jComboBox5.getSelectedItem().toString());  // TODO add your handling code here:
+       
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
-      System.out.println(jComboBox8.getSelectedItem().toString());   // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox8ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
-      System.out.println(jComboBox6.getSelectedItem().toString());   // TODO add your handling code here:
+      
     }//GEN-LAST:event_jComboBox6ActionPerformed
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
-     System.out.println(jComboBox9.getSelectedItem().toString());   // TODO add your handling code here:
+     
     }//GEN-LAST:event_jComboBox9ActionPerformed
     
-    int x = 1;
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
 
         writeOut();
@@ -429,31 +427,61 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        //File happyFile = new File(stuff+".csv");
+       
+        String[] lines;
+        String dataLine = "";
+        String data = "";
+        try (Scanner inputStream = new Scanner(templateFile)){
+            
+            dataLine = inputStream.nextLine();
+            
+            while(inputStream.hasNext()){
+                
+                data += dataLine + "\n";
+                System.out.println(data);
+                
+                dataLine = inputStream.nextLine();
+                
+            }
+            
+            System.out.println("done copy");
+            
+        } catch (FileNotFoundException ex) {
+        }
+        
+        lines = data.split("\n");
+        
+        lines[lines.length - 1] = "";
+       
         try {
-              PrintWriter outputStream = new PrintWriter(templateFile);
-              outputStream.println("");
-              outputStream.close();
-              
-              //  printWriter.flush();
+            
+                FileWriter  fileWriter = new FileWriter(templateFile, true);
+                
+                fileWriter.write("");
+                
+                BufferedWriter buffer = new BufferedWriter(fileWriter);
+                
+                PrintWriter printWriter = new PrintWriter(buffer);
+                
+                fileWriter.write("");
+                
+                for(int i = 0; i < lines.length; i++){
+                    printWriter.append(lines[i]);
+                    printWriter.append("\n");
+                }
+                    
+                printWriter.close();
+                
             } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
         
-       String oldText = readFile(templateFile);
-       System.out.println(oldText);
-       
-       try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                printWriter.print(oldText);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("WOO");
-            }
+        double currentItem = Double.parseDouble(jTextField2.getText());
+        currentItem--;
+        jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
+        jProgressBar1.setValue(--progress);
+        jProgressBar1.setString(progress + "/40");
+        
+        
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -554,25 +582,6 @@ private final CsvFileReader fileReader;
     private void writeOut(){
         double loops = Double.parseDouble(jTextField1.getText()) + 1;
         double currentItem = Double.parseDouble(jTextField2.getText());
-//        String newOut = ",,";
-//        newOut += String.valueOf(currentItem);
-//        newOut += ",,,,,,,,";
-//        newOut += checkNA(jComboBox4.getSelectedItem().toString());
-//        newOut += ",";
-//        newOut += checkNA(jComboBox5.getSelectedItem().toString());
-//        newOut += ",";
-//        newOut += checkNA(jComboBox6.getSelectedItem().toString());
-//        newOut += ",";
-//        newOut += checkNA(jComboBox7.getSelectedItem().toString());
-//        newOut += ",";
-//        newOut += checkNA(jComboBox8.getSelectedItem().toString());
-//        newOut += ",,";
-//        newOut += checkNA(jComboBox9.getSelectedItem().toString());
-//        newOut += ",,";
-//        newOut += checkNA(jComboBox3.getSelectedItem().toString());
-//        newOut += ",,,,,,,,,,";
-//        newOut += jTextField4.getText();
-//        newOut += ",\n";
         String newOut;
         
     try {
