@@ -40,10 +40,12 @@ private final CsvFileReader fileReader;
 
     mainWindow() throws FileNotFoundException {
         initComponents();
-        
+        progress = 1;
         templateFile = openFile();
         
         fileReader = new CsvFileReader(templateFile);
+        jProgressBar1.setValue(progress);
+        jProgressBar1.setString(progress + "/40");
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
         jComboBox3.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.TANTALUM)));
         jComboBox4.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
@@ -526,300 +528,83 @@ private final CsvFileReader fileReader;
         
     }
     
-    private void writeOut(){
-        double k = Double.parseDouble(jTextField1.getText());
-        double b = k-1;
-        
-            
-            String duplicateText = jTextField1.getText();
-            String noteText= jTextField4.getText();
-            double s = Double.parseDouble(jTextField2.getText());
-            double g = s-1;
-            jProgressBar1.setValue(x);
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                printWriter.printf( "\n");
-                String total2 = String.valueOf(s);
-                printWriter.printf( ",,,%s",total2);
-                printWriter.close();
-                
-                
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.printf( ",,,,,,,,,,,,%s","");
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox4.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox5.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox6.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox7.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox8.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } 
-            catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox9.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-                
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox3.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",,,,,%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jTextField4.getText();
-                stringthing = checkNA(noteText);
-                printWriter.printf(",,%s",noteText);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            s++;
-            jProgressBar1.setString(x + "/40");
-            jTextField2.setText(String.format("%.0f", s));
-           
-             
-            if(x == 39){
-                nextButton.setText("Finish");
-                x++;
-            }
-            else if(s>40)
-                System.exit(0);
-            else    
-                x++;
-            if(k!=0){
-                 double A=(s+b)-1;
-                 for(s=s;s<=A;s+=0){
-                     
-            jProgressBar1.setValue(x);
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                printWriter.printf( "\n");
-                String total2 = String.valueOf(s);
-                printWriter.printf( ",,,%s",total2);
-                printWriter.close();
-                
-                
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.printf( ",,,,,,,,,,,,%s","");
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox4.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox5.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox6.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox7.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox8.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox9.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-          
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jComboBox3.getSelectedItem().toString();
-                stringthing = checkNA(stringthing);
-                printWriter.printf( ",,,,,%s",stringthing);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                //File happyFile = new File(stuff+".csv");
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                PrintWriter printWriter = new PrintWriter(buffer);
-                String stringthing = jTextField4.getText();
-                stringthing = checkNA(noteText);
-                printWriter.printf(",,%s",noteText);
-                printWriter.close();
-            } catch (IOException ex) {
-                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("WOO");
-            }
-            s++;
-            jProgressBar1.setString(x + "/40");
-            jTextField2.setText(String.format("%.0f", s));
-            
-             
-            if(x == 39){
-                nextButton.setText("Finish");
-                x++;
-               // System.exit(0);
-            }
-            else if(s>40)
-                System.exit(0);
-            else    
-                x++;
-                 
-                 }
-            
-               }
+    private String compileOutput(){
+        String newOut = ",,";
+        newOut += jTextField2.getText();
+        newOut += ",,,,,,,,";
+        newOut += checkNA(jComboBox4.getSelectedItem().toString());
+        newOut += ",";
+        newOut += checkNA(jComboBox5.getSelectedItem().toString());
+        newOut += ",";
+        newOut += checkNA(jComboBox6.getSelectedItem().toString());
+        newOut += ",";
+        newOut += checkNA(jComboBox7.getSelectedItem().toString());
+        newOut += ",";
+        newOut += checkNA(jComboBox8.getSelectedItem().toString());
+        newOut += ",";
+        newOut += checkNA(jComboBox9.getSelectedItem().toString());
+        newOut += ",,";
+        newOut += checkNA(jComboBox3.getSelectedItem().toString());
+        newOut += ",,,,,,,,,,";
+        newOut += jTextField4.getText();
+        newOut += ",\n";
+        return newOut;
     }
+    
+    private void writeOut(){
+        double loops = Double.parseDouble(jTextField1.getText()) + 1;
+        double currentItem = Double.parseDouble(jTextField2.getText());
+//        String newOut = ",,";
+//        newOut += String.valueOf(currentItem);
+//        newOut += ",,,,,,,,";
+//        newOut += checkNA(jComboBox4.getSelectedItem().toString());
+//        newOut += ",";
+//        newOut += checkNA(jComboBox5.getSelectedItem().toString());
+//        newOut += ",";
+//        newOut += checkNA(jComboBox6.getSelectedItem().toString());
+//        newOut += ",";
+//        newOut += checkNA(jComboBox7.getSelectedItem().toString());
+//        newOut += ",";
+//        newOut += checkNA(jComboBox8.getSelectedItem().toString());
+//        newOut += ",,";
+//        newOut += checkNA(jComboBox9.getSelectedItem().toString());
+//        newOut += ",,";
+//        newOut += checkNA(jComboBox3.getSelectedItem().toString());
+//        newOut += ",,,,,,,,,,";
+//        newOut += jTextField4.getText();
+//        newOut += ",\n";
+        String newOut;
+        
+    try {
+        FileWriter outFile = new FileWriter(templateFile, true);
+        BufferedWriter outWriter = new BufferedWriter(outFile);
+        PrintWriter output = new PrintWriter(outWriter);
+        
+        while(loops > 0 && progress <= 40){
+            newOut = compileOutput();
+            
+            output.append(newOut);
+            
+            jTextField1.setText(String.valueOf(--loops));
+            jTextField2.setText(String.format("%0.f", ++currentItem));
+            jProgressBar1.setValue(++progress);
+            jProgressBar1.setString(progress + "/40");
+        }
+        
+        outWriter.close();
+        if(progress > 40)
+            System.exit(0);
+        else if(progress == 40){
+                nextButton.setText("Finish");
+            }
+        
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
+        System.out.println("Write failed...");
+    }
+
+}
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -860,6 +645,7 @@ private String stuff;
 private File templateFile;
 private String noteText;
 private String duplicateText;
+private int progress;
 
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
