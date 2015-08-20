@@ -453,9 +453,13 @@ private final CsvFileReader fileReader;
        
         try {
             
-                FileWriter  fileWriter = new FileWriter(templateFile, true);
+                FileWriter  fileWriter = new FileWriter(templateFile, false);
                 
                 fileWriter.write("");
+                
+                fileWriter.close();
+                
+                fileWriter = new FileWriter(templateFile, true);
                 
                 BufferedWriter buffer = new BufferedWriter(fileWriter);
                 
