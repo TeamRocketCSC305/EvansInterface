@@ -427,63 +427,63 @@ private final CsvFileReader fileReader;
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-       
-        String[] lines;
-        String dataLine = "";
-        String data = "";
-        try (Scanner inputStream = new Scanner(templateFile)){
-            
-            dataLine = inputStream.nextLine();
-            
-            while(inputStream.hasNext()){
-                
-                data += dataLine + "\n";
-                System.out.println(data);
-                
+        if(progress > 1){
+            String[] lines;
+            String dataLine = "";
+            String data = "";
+            try (Scanner inputStream = new Scanner(templateFile)){
+
                 dataLine = inputStream.nextLine();
-                
-            }
-            
-            System.out.println("done copy");
-            
-        } catch (FileNotFoundException ex) {
-        }
-        
-        lines = data.split("\n");
-       
-        try {
-            
-                FileWriter  fileWriter = new FileWriter(templateFile, false);
-                
-                fileWriter.write("");
-                
-                fileWriter.close();
-                
-                fileWriter = new FileWriter(templateFile, true);
-                
-                BufferedWriter buffer = new BufferedWriter(fileWriter);
-                
-                PrintWriter printWriter = new PrintWriter(buffer);
-                
-                fileWriter.write("");
-                
-                for(int i = 0; i < lines.length; i++){
-                    printWriter.append(lines[i]);
-                    printWriter.append("\n");
+
+                while(inputStream.hasNext()){
+
+                    data += dataLine + "\n";
+                    System.out.println(data);
+
+                    dataLine = inputStream.nextLine();
+
                 }
-                    
-                printWriter.close();
-                
-            } catch (IOException ex) {
+
+                System.out.println("done copy");
+
+            } catch (FileNotFoundException ex) {
             }
+
+            lines = data.split("\n");
+
+            try {
+
+                    FileWriter  fileWriter = new FileWriter(templateFile, false);
+
+                    fileWriter.write("");
+
+                    fileWriter.close();
+
+                    fileWriter = new FileWriter(templateFile, true);
+
+                    BufferedWriter buffer = new BufferedWriter(fileWriter);
+
+                    PrintWriter printWriter = new PrintWriter(buffer);
+
+                    fileWriter.write("");
+
+                    for(int i = 0; i < lines.length; i++){
+                        printWriter.append(lines[i]);
+                        printWriter.append("\n");
+                    }
+
+                    printWriter.close();
+
+                } catch (IOException ex) {
+                }
+
+            double currentItem = Double.parseDouble(jTextField2.getText());
+            currentItem--;
+            jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
+            jProgressBar1.setValue(--progress);
+            jProgressBar1.setString(progress + "/40");
         
-        double currentItem = Double.parseDouble(jTextField2.getText());
-        currentItem--;
-        jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
-        jProgressBar1.setValue(--progress);
-        jProgressBar1.setString(progress + "/40");
-        
-        
+        }
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
