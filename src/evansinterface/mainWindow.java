@@ -44,6 +44,9 @@ private final CsvFileReader fileReader;
         progress = 1;
         templateFile = openFile();
         
+        if(templateFile == null)
+            System.exit(0);
+        
         fileReader = new CsvFileReader(templateFile);
         jProgressBar1.setValue(progress);
         jProgressBar1.setString(progress + "/40");
