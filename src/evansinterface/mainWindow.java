@@ -450,8 +450,6 @@ private final CsvFileReader fileReader;
         }
         
         lines = data.split("\n");
-        
-        lines[lines.length - 1] = "";
        
         try {
             
