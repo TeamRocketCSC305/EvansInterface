@@ -133,9 +133,9 @@ public class CsvFileReader {
                 allLines[0][i] = currentLine;
             }
             
-            while(inputNew.hasNext() && !currentLine.contains("Entered Data")){ //while reading file  and not done
-                lines[linePos++] = currentLine;
+            while(inputNew.hasNext()){
                 currentLine = inputNew.nextLine();
+                allLines[1][linePos++] = currentLine;
             }
             
             return allLines;
