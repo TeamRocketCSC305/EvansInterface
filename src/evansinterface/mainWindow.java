@@ -640,18 +640,18 @@ private final CsvFileReader fileReader;
 //        
 //        outWriter.close();
 //        
-        if(progress > 40)
-            System.exit(0);
-        else if(progress == 40){
-                nextButton.setText("Finish");
-            }
-        
-
-         } 
-           catch (IOException ex) {
-           ex.printStackTrace();
-           System.out.println("Write failed...");
-         }
+//        if(progress > 40)
+//            System.exit(0);
+//        else if(progress == 40){
+//                nextButton.setText("Finish");
+//            }
+//        
+//
+//         } 
+//           catch (IOException ex) {
+//           ex.printStackTrace();
+//           System.out.println("Write failed...");
+//         }
 
 }
     
