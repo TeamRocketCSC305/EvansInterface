@@ -609,37 +609,37 @@ private final CsvFileReader fileReader;
     }
     
     private void writeOut(){
-        double loops = Double.parseDouble(jTextField2.getText())+1;
-        double currentItem = Double.parseDouble(jTextField2.getText());
-        int currentitem= Integer.parseInt(jTextField2.getText());
-        int things;
-        String newOut;
-        things = ((currentitem))/4;
-    try {
-        FileWriter outFile = new FileWriter(templateFile, true);
-        BufferedWriter outWriter = new BufferedWriter(outFile);
-        PrintWriter output = new PrintWriter(outWriter);
-        System.out.printf("%f",currentItem);  //I'm thinking maybe write the value to the file then read it in order to store initial value and current value
-        while(loops > 0 && progress <= 40){
-            newOut = compileOutput();
-            
-            output.append(newOut);
-            
-            //jTextField1.setText(String.valueOf(--loops).indexOf(".") < 0 ? String.valueOf(loops) : String.valueOf(loops).replaceAll("0*$", "").replaceAll("\\.$", ""));
-          //  if(currentItem>1){
-           // things= things+(things-things)+1;
-           //   }
-            
-            loops = progress;
-            progress = things;
-            progress++;
-            jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
-            jProgressBar1.setValue(--progress);
-            jProgressBar1.setString(progress + "/40"); //why would this ever be illegal? you're not adding you're saying to put that string after that number
-        }
-        
-        outWriter.close();
-        
+//        double loops = Double.parseDouble(jTextField2.getText())+1;
+//        double currentItem = Double.parseDouble(jTextField2.getText());
+//        int currentitem= Integer.parseInt(jTextField2.getText());
+//        int things;
+//        String newOut;
+//        things = ((currentitem))/4;
+//    try {
+//        FileWriter outFile = new FileWriter(templateFile, true);
+//        BufferedWriter outWriter = new BufferedWriter(outFile);
+//        PrintWriter output = new PrintWriter(outWriter);
+//        System.out.printf("%f",currentItem);  //I'm thinking maybe write the value to the file then read it in order to store initial value and current value
+//        while(loops > 0 && progress <= 40){
+//            newOut = compileOutput();
+//            
+//            output.append(newOut);
+//            
+//            //jTextField1.setText(String.valueOf(--loops).indexOf(".") < 0 ? String.valueOf(loops) : String.valueOf(loops).replaceAll("0*$", "").replaceAll("\\.$", ""));
+//          //  if(currentItem>1){
+//           // things= things+(things-things)+1;
+//           //   }
+//            
+//            loops = progress;
+//            progress = things;
+//            progress++;
+//            jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
+//            jProgressBar1.setValue(--progress);
+//            jProgressBar1.setString(progress + "/40"); //why would this ever be illegal? you're not adding you're saying to put that string after that number
+//        }
+//        
+//        outWriter.close();
+//        
         if(progress > 40)
             System.exit(0);
         else if(progress == 40){
