@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.String.valueOf;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +42,10 @@ private final CsvFileReader fileReader;
 
     mainWindow() throws FileNotFoundException {
         initComponents();
-        progress = 1;
+        //int numberinput = ;
+        progress=0;
+        //int w = progress;
+        //int progress = Integer.parseInt(jTextField2.getText());
         templateFile = openFile();
         
         if(templateFile == null)
@@ -135,6 +139,7 @@ private final CsvFileReader fileReader;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTextField2.setText("1");
         jTextField2.setToolTipText("Serial Number");
         jTextField2.setMaximumSize(new java.awt.Dimension(102, 2147483647));
         jTextField2.setName(""); // NOI18N
@@ -411,24 +416,61 @@ private final CsvFileReader fileReader;
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
      
     }//GEN-LAST:event_jComboBox9ActionPerformed
-    
+    int y; 
+    double numberinputorgvalue =0;
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-
+  
+  //progress/4 = progress;
+  String t ="1";
+   
+    
+        int currentItem = Integer.parseInt(jTextField2.getText());
+        progress =  currentItem; //add "progress" with user inputted number
+        //for(y=0;y<1;y+=1){
+        //if(progress<=currentItem){
+         //  progress =currentItem;
+           // System.out.println("progress set equal to 1");
+            
+        //}
+        //progress = 0;
+        // return progress;
+        //}
+   
+   
+    double i = progress-1; // i is just for the for-loop
+    numberinputorgvalue = progress-1;
+    //for(numberinputorgvalue=i; numberinput>(numberinput-i); numberinput++){
+        if(progress>numberinputorgvalue+1){
+     for(i=numberinputorgvalue;i<progress;i+=1){
+         
+         System.out.println("well, this is doing things");
+            
+            
+            jTextField2.setText(String.valueOf(progress).indexOf(".") < 0 ? String.valueOf(progress) : String.valueOf(progress).replaceAll("0*$", "").replaceAll("\\.$", ""));
+            jProgressBar1.setValue(--progress);
+            jProgressBar1.setString(progress + "/40");
+            writeOut();
+            
+        }
+     
+    }
+        else{
+        progress++;
         writeOut();
+        System.out.println("it's going to writeOut from next button");
+            
+        }  
+        
     
         //}
 // System.out.println("I guess this printed?");
   //  System.out.println("\n");
     }//GEN-LAST:event_nextButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
-
+   
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         if(progress > 1){
             String[] lines;
@@ -479,15 +521,21 @@ private final CsvFileReader fileReader;
 
                 } catch (IOException ex) {
                 }
-
-            double currentItem = Double.parseDouble(jTextField2.getText());
+   // double numberinput = Double.parseDouble(jTextField2.getText());
+    //numberinputorgvalue = Double.parseDouble(jTextField2.getText());
+    
+  
+   double currentItem = Double.parseDouble(jTextField2.getText());
             currentItem--;
             jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
             jProgressBar1.setValue(--progress);
             jProgressBar1.setString(progress + "/40");
-        
         }
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -585,28 +633,37 @@ private final CsvFileReader fileReader;
     }
     
     private void writeOut(){
-        double loops = Double.parseDouble(jTextField1.getText()) + 1;
-        double currentItem = Double.parseDouble(jTextField2.getText());
+        double loops = Double.parseDouble(jTextField2.getText())+1;
+       double currentItem = Double.parseDouble(jTextField2.getText());
+       int currentitem= Integer.parseInt(jTextField2.getText());
+       int things;
         String newOut;
-        
+        things = ((currentitem))/4;
     try {
         FileWriter outFile = new FileWriter(templateFile, true);
         BufferedWriter outWriter = new BufferedWriter(outFile);
         PrintWriter output = new PrintWriter(outWriter);
-        
+        System.out.printf("%f",currentItem);  //I'm thinking maybe write the value to the file then read it in order to store initial value and current value
         while(loops > 0 && progress <= 40){
             newOut = compileOutput();
             
             output.append(newOut);
             
-            jTextField1.setText(String.valueOf(--loops).indexOf(".") < 0 ? String.valueOf(loops) : String.valueOf(loops).replaceAll("0*$", "").replaceAll("\\.$", ""));
-            currentItem++;
+            //jTextField1.setText(String.valueOf(--loops).indexOf(".") < 0 ? String.valueOf(loops) : String.valueOf(loops).replaceAll("0*$", "").replaceAll("\\.$", ""));
+          //  if(currentItem>1){
+           // things= things+(things-things)+1;
+           //   }
+            
+            loops =progress;
+            progress=things;
+           progress++;
             jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
-            jProgressBar1.setValue(++progress);
-            jProgressBar1.setString(progress + "/40");
+            jProgressBar1.setValue(--progress);
+            jProgressBar1.setString(progress + "/40"); //why would this ever be illegal? you're not adding you're saying to put that string after that number
         }
         
         outWriter.close();
+        
         if(progress > 40)
             System.exit(0);
         else if(progress == 40){
@@ -614,10 +671,11 @@ private final CsvFileReader fileReader;
             }
         
 
-    } catch (IOException ex) {
-        ex.printStackTrace();
-        System.out.println("Write failed...");
-    }
+         } 
+           catch (IOException ex) {
+           ex.printStackTrace();
+           System.out.println("Write failed...");
+         }
 
 }
     
@@ -660,7 +718,8 @@ private File templateFile;
 private String noteText;
 private String duplicateText;
 private int progress;
-
+//private int numberinput = progress;
+//private int numberinput;
     private void CsvFileWriter() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
