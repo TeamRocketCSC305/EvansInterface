@@ -630,10 +630,5 @@ private String[] enteredData;
 private int dataRange;
 String newOut;
 private final CsvFileReader fileReader;
-//private int numberinput = progress;
-//private int numberinput;
-    private void CsvFileWriter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }
