@@ -77,7 +77,7 @@ public class CsvFileReader {
                     data = inputStream.nextLine();
                     System.out.println(data);
                     
-                    if (data.contains("Serial")){
+                    if (data.contains("Serial #")){
                         while(inputStream.hasNext() && !done){
                         data = inputStream.nextLine();
                         System.out.println(data);
