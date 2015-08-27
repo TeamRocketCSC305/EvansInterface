@@ -30,10 +30,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */ 
  
 public class mainWindow extends javax.swing.JFrame {
-
-private final CsvFileReader fileReader;
-    private Object jTextfield3;
-    private Object jTextField3;
     
         
         
@@ -101,7 +97,6 @@ private final CsvFileReader fileReader;
         jComboBox9 = new javax.swing.JComboBox();
         jProgressBar1 = new javax.swing.JProgressBar();
         nextButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -231,21 +226,13 @@ private final CsvFileReader fileReader;
         jProgressBar1.setMaximum(40);
         jProgressBar1.setMinimum(1);
         jProgressBar1.setToolTipText("Progress");
-        jProgressBar1.setString("0/40");
+        jProgressBar1.setString("1/40");
         jProgressBar1.setStringPainted(true);
 
         nextButton.setText("Next");
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
-            }
-        });
-
-        jTextField1.setText("0");
-        jTextField1.setToolTipText("");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -298,9 +285,7 @@ private final CsvFileReader fileReader;
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -334,10 +319,7 @@ private final CsvFileReader fileReader;
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -528,10 +510,6 @@ private final CsvFileReader fileReader;
         }
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -586,29 +564,55 @@ private final CsvFileReader fileReader;
     }
     
     private String compileOutput(){
-        String newOut = ",,";
-        newOut += jTextField2.getText();
-        newOut += ",,,,,,,,";
-        newOut += checkNA(jComboBox4.getSelectedItem().toString());
-        newOut += ",";
-        newOut += checkNA(jComboBox5.getSelectedItem().toString());
-        newOut += ",";
-        newOut += checkNA(jComboBox6.getSelectedItem().toString());
-        newOut += ",";
-        newOut += checkNA(jComboBox7.getSelectedItem().toString());
-        newOut += ",";
-        newOut += checkNA(jComboBox8.getSelectedItem().toString());
-        newOut += ",";
-        newOut += checkNA(jComboBox9.getSelectedItem().toString());
-        newOut += ",,";
-        newOut += checkNA(jComboBox3.getSelectedItem().toString());
-        newOut += ",,,,,,,,,,";
-        newOut += jTextField4.getText();
-        newOut += ",\n";
-        return newOut;
+        String oneOut = ",,";
+        oneOut += jTextField2.getText();
+        oneOut += ",,,,,,,,";
+        oneOut += checkNA(jComboBox4.getSelectedItem().toString());
+        oneOut += ",";
+        oneOut += checkNA(jComboBox5.getSelectedItem().toString());
+        oneOut += ",";
+        oneOut += checkNA(jComboBox6.getSelectedItem().toString());
+        oneOut += ",";
+        oneOut += checkNA(jComboBox7.getSelectedItem().toString());
+        oneOut += ",";
+        oneOut += checkNA(jComboBox8.getSelectedItem().toString());
+        oneOut += ",";
+        oneOut += checkNA(jComboBox9.getSelectedItem().toString());
+        oneOut += ",,";
+        oneOut += checkNA(jComboBox3.getSelectedItem().toString());
+        oneOut += ",,,,,,,,,,";
+        oneOut += jTextField4.getText();
+        oneOut += ",\n";
+        return oneOut;
     }
     
     private void writeOut(){
+        
+        
+        
+        while(progress < Double.parseDouble(jTextField2.getText())){
+            
+            dataText = allData[1][progress - 1];
+            dataText = dataText.substring(0, dataText.indexOf(','));
+            
+            allData[1][progress - 1] = dataText + newOut;
+            
+            progress++;
+        }
+        
+        dataText = allData[1][progress - 1];
+        dataText = dataText.substring(0, dataText.indexOf(','));
+        
+        newOut = compileOutput();
+        
+        allData[1][progress - 1] = dataText + newOut;
+        
+        progress++;
+        jTextField2.setText(String.valueOf(progress));
+        jProgressBar1.setValue(progress);
+        jProgressBar1.setString(progress + "/" + dataRange);
+        
+        
 //        double loops = Double.parseDouble(jTextField2.getText())+1;
 //        double currentItem = Double.parseDouble(jTextField2.getText());
 //        int currentitem= Integer.parseInt(jTextField2.getText());
@@ -652,6 +656,8 @@ private final CsvFileReader fileReader;
 //           ex.printStackTrace();
 //           System.out.println("Write failed...");
 //         }
+        
+        
 
 }
     
@@ -685,14 +691,12 @@ private final CsvFileReader fileReader;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton nextButton;
     // End of variables declaration//GEN-END:variables
 
-private String inString1;
-private String instring2;
+private String dataText;
 private String stuff;
 private File templateFile;
 private String noteText;
@@ -702,6 +706,8 @@ private String[][] allData;
 private String[] topData;
 private String[] enteredData;
 private int dataRange;
+String newOut;
+private final CsvFileReader fileReader;
 //private int numberinput = progress;
 //private int numberinput;
     private void CsvFileWriter() {
