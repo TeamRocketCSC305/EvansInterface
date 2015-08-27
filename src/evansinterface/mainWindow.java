@@ -5,8 +5,6 @@
  */
 //package java.sql;
 package evansinterface;
-//import com.opencsv.CSVWriter;
-//import static java.awt.PageAttributes.MediaType.A;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -521,8 +519,6 @@ private final CsvFileReader fileReader;
 
                 } catch (IOException ex) {
                 }
-   // double numberinput = Double.parseDouble(jTextField2.getText());
-    //numberinputorgvalue = Double.parseDouble(jTextField2.getText());
     
   
    double currentItem = Double.parseDouble(jTextField2.getText());
@@ -634,9 +630,9 @@ private final CsvFileReader fileReader;
     
     private void writeOut(){
         double loops = Double.parseDouble(jTextField2.getText())+1;
-       double currentItem = Double.parseDouble(jTextField2.getText());
-       int currentitem= Integer.parseInt(jTextField2.getText());
-       int things;
+        double currentItem = Double.parseDouble(jTextField2.getText());
+        int currentitem= Integer.parseInt(jTextField2.getText());
+        int things;
         String newOut;
         things = ((currentitem))/4;
     try {
@@ -654,9 +650,9 @@ private final CsvFileReader fileReader;
            // things= things+(things-things)+1;
            //   }
             
-            loops =progress;
-            progress=things;
-           progress++;
+            loops = progress;
+            progress = things;
+            progress++;
             jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
             jProgressBar1.setValue(--progress);
             jProgressBar1.setString(progress + "/40"); //why would this ever be illegal? you're not adding you're saying to put that string after that number
