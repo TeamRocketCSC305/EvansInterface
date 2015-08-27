@@ -50,8 +50,8 @@ public class CsvFileReader {
         
        
    
-        private static String[] readString() throws FileNotFoundException{
-        
+        private static void readString() throws FileNotFoundException{
+            
             values = new String[3][];
             int line = 0;
             for(int i = 0; i < values.length; i++){
@@ -62,24 +62,25 @@ public class CsvFileReader {
                 String data;
                 boolean done = false;
                  
-                while(inputStream.hasNext() && !done){
+                while(inputStream.hasNext() && !done){ //while reading file  and not done
                     
                     data = inputStream.nextLine();
                     System.out.println(data);
                     
                     if (data.contains("Serial #")){
-                        while(inputStream.hasNext() && !done){
-                        data = inputStream.nextLine();
-                        System.out.println(data);
-                        if(data.contains("Entered")){
+                        while(inputStream.hasNext() && !done){ //while reading file and not done
+                        data = inputStream.nextLine(); //go to the next line
+                        System.out.println(data); //printing "false" into the console? why is that essential?
+                        if(data.contains("Entered")){ //stop at the line that reads "Entered"
                             System.out.println("Done Import");
-                            done = true;
+                            done = true; //set done equal to true
                         }
-                        if(!done){
+                        if(!done){ // if not done
+                         
                         rowArray = new String[]{"","","","","","","","","","","","","","","","","","","","","","","","","","",
                             "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",
                             "","","","","","","","","","","","","","","","","","",""};
-                        for(int i = 0; i < data.split(",").length; i++){
+                        for(int i = 0; i < data.split(",").length; i++){ //i = 0, while i<amount of splits by comma, add i in increments of 1
                             rowArray[i] = data.split(",")[i];
                         }
                         System.out.print("\n");
@@ -119,6 +120,32 @@ public class CsvFileReader {
             }
         }
         
+        public String[] getLines(){
+          
+        Scanner inputStream = new Scanner(file);
+            String data;
+             boolean done = false;
+        
+            data = inputStream.nextLine();
+        
+             while(inputStream.hasNext() && !done){ //while reading file  and not done
+                    
+                    data = inputStream.nextLine();
+                    System.out.println(data);
+                    
+                    if (data.contains("Serial #")){
+                        while(inputStream.hasNext() && !done){ //while reading file and not done
+                        data = inputStream.nextLine(); //go to the next line
+                        System.out.println(data); //printing "false" into the console? why is that essential?
+                        if(data.contains("Entered")){ //stop at the line that reads "Entered"
+                            System.out.println("Done Import");
+                            done = true; //set done equal to true
+                        }
+            
+            
+            return null;
+        }
+                    
                    private static String[] rowArray;
                    private static String[][] values;
                    private static File file;
