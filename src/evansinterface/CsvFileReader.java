@@ -51,18 +51,7 @@ public class CsvFileReader {
        
    
         private static String[] readString() throws FileNotFoundException{
-            
-         if(file.exists() != true){
-             try{
-        Runtime runtime = Runtime.getRuntime();
-        Process process =runtime.exec("cmd /c start Z:\\EvansInterface_Beta\\wat.vbs");
-        System.exit(0);
-             }  catch (IOException ex) {
-                    Logger.getLogger(CsvFileReader.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-                
-            }
+        
             values = new String[3][];
             int line = 0;
             for(int i = 0; i < values.length; i++){
