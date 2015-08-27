@@ -40,18 +40,17 @@ private final CsvFileReader fileReader;
 
     mainWindow() throws FileNotFoundException {
         initComponents();
-        //int numberinput = ;
-        progress=0;
-        //int w = progress;
-        //int progress = Integer.parseInt(jTextField2.getText());
         templateFile = openFile();
         
         if(templateFile == null)
             System.exit(0);
         
         fileReader = new CsvFileReader(templateFile);
+        allData = fileReader.getLines();
+        dataRange = allData[1].length;
+        jProgressBar1.setMaximum(dataRange);
         jProgressBar1.setValue(progress);
-        jProgressBar1.setString(progress + "/40");
+        jProgressBar1.setString(progress + "/" + dataRange);
        // jComboBox1.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.GLASSING)));
         jComboBox3.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.TANTALUM)));
         jComboBox4.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
@@ -567,25 +566,6 @@ private final CsvFileReader fileReader;
     }
     }
     
-    private String readFile( File file ){
-        try{
-    BufferedReader reader = new BufferedReader( new FileReader (file));
-    String         line = null;
-    StringBuilder  stringBuilder = new StringBuilder();
-    String         ls = System.getProperty("line.separator");
-
-    while( ( line = reader.readLine() ) != null ) {
-        stringBuilder.append( line );
-        stringBuilder.append( ls );
-    }
-    
-    String things = stringBuilder.toString();
-    return things;
-    }
-    catch (Exception e){
-        return "";
-    }
-    }
     
     private String checkNA(String inString){
         if(inString.equals("-----"))
@@ -675,6 +655,10 @@ private final CsvFileReader fileReader;
 
 }
     
+    private void getRange(){
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
@@ -714,6 +698,10 @@ private File templateFile;
 private String noteText;
 private String duplicateText;
 private int progress;
+private String[][] allData;
+private String[] topData;
+private String[] enteredData;
+private int dataRange;
 //private int numberinput = progress;
 //private int numberinput;
     private void CsvFileWriter() {
