@@ -38,6 +38,7 @@ public class mainWindow extends javax.swing.JFrame {
             System.exit(0);
         
         progress = 1;
+        changedAn = false;
         fileReader = new CsvFileReader(templateFile);
         allData = fileReader.getLines();
         getDataRange();
@@ -402,23 +403,23 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-  
+        changedAn = true;
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
-       
+        changedAn = true;
     }//GEN-LAST:event_jComboBox7ActionPerformed
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-       
+        changedAn = true;
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
-        
+        changedAn = true;
     }//GEN-LAST:event_jComboBox8ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
-      
+        changedAn = true;
     }//GEN-LAST:event_jComboBox6ActionPerformed
 
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
@@ -538,6 +539,24 @@ public class mainWindow extends javax.swing.JFrame {
         return oneOut;
     }
     
+    private void anCheck(){
+        if(changedAn){
+            if(jComboBox8.getSelectedIndex() > 0){
+                jComboBox7.setSelectedIndex(jComboBox8.getSelectedIndex());
+            }
+            if(jComboBox7.getSelectedIndex() > 0){
+                jComboBox6.setSelectedIndex(jComboBox7.getSelectedIndex());
+            }
+            if(jComboBox6.getSelectedIndex() > 0){
+                jComboBox5.setSelectedIndex(jComboBox6.getSelectedIndex());
+            }
+            if(jComboBox5.getSelectedIndex() > 0){
+                jComboBox4.setSelectedIndex(jComboBox5.getSelectedIndex());
+            }
+            changedAn = false;
+        }
+    }
+    
     private void writeOutFile(){
         try {
             FileWriter fileOut = new FileWriter(templateFile, false);
@@ -578,6 +597,8 @@ public class mainWindow extends javax.swing.JFrame {
         newOut = compileOutput();
         
         allData[1][progress - 1] = dataText + newOut;
+        
+        anCheck();
         
         progress++;
         jTextField2.setText(String.valueOf(progress));
@@ -630,5 +651,6 @@ private String[] enteredData;
 private int dataRange;
 String newOut;
 private final CsvFileReader fileReader;
+boolean changedAn;
     
 }
