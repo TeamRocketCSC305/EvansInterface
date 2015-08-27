@@ -16,7 +16,9 @@ public class CsvFileReader {
     
     public CsvFileReader(File fileIn){
         file = fileIn;
-        lines = new String[100];
+        allLines = new String[2][];
+        allLines[0] = new String[17];
+        allLines[1] = new String[100];
     }
 
     /**
@@ -120,36 +122,29 @@ public class CsvFileReader {
             }
         }
         
-        public String[] getLines(){
+        public String[][] getLines() throws FileNotFoundException{
           
-        Scanner inputStream = new Scanner(file);
-            String data;
-             boolean done = false;
+        Scanner inputNew = new Scanner(file);
+            String currentLine;
+            int linePos = 0;
         
-            data = inputStream.nextLine();
-        
-             while(inputStream.hasNext() && !done){ //while reading file  and not done
-                    
-                    data = inputStream.nextLine();
-                    System.out.println(data);
-                    
-                    if (data.contains("Serial #")){
-                        while(inputStream.hasNext() && !done){ //while reading file and not done
-                        data = inputStream.nextLine(); //go to the next line
-                        System.out.println(data); //printing "false" into the console? why is that essential?
-                        if(data.contains("Entered")){ //stop at the line that reads "Entered"
-                            System.out.println("Done Import");
-                            done = true; //set done equal to true
-                        }
+            for(int i = 0; i < allLines[0].length; i++){
+                currentLine = inputNew.nextLine();
+                allLines[0][i] = currentLine;
+            }
             
+            while(inputNew.hasNext() && !currentLine.contains("Entered Data")){ //while reading file  and not done
+                lines[linePos++] = currentLine;
+                currentLine = inputNew.nextLine();
+            }
             
-            return null;
+            return allLines;
         }
                     
                    private static String[] rowArray;
                    private static String[][] values;
                    private static File file;
-                   private String[] lines;
+                   private String[][] allLines;
     }
     
 
