@@ -5,16 +5,11 @@
  */
 //package java.sql;
 package evansinterface;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import static java.lang.String.valueOf;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -41,9 +36,10 @@ public class mainWindow extends javax.swing.JFrame {
         if(templateFile == null)
             System.exit(0);
         
+        progress = 1;
         fileReader = new CsvFileReader(templateFile);
         allData = fileReader.getLines();
-        dataRange = allData[1].length;
+        getDataRange();
         jProgressBar1.setMaximum(dataRange);
         jProgressBar1.setValue(progress);
         jProgressBar1.setString(progress + "/" + dataRange);
@@ -55,6 +51,12 @@ public class mainWindow extends javax.swing.JFrame {
         jComboBox7.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
         jComboBox8.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.ANODE)));
         jComboBox9.setModel(new DefaultComboBoxModel(fileReader.getBoxItems(BoxItems.CATHODE)));
+    }
+    
+    private void getDataRange(){
+        int i = 0;
+        while(allData[1][i] != null){i++;}
+        dataRange = i;
     }
       
       
@@ -395,55 +397,23 @@ public class mainWindow extends javax.swing.JFrame {
     private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
      
     }//GEN-LAST:event_jComboBox9ActionPerformed
-    int y; 
-    double numberinputorgvalue =0;
+
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-  
-  //progress/4 = progress;
-  String t ="1";
-   
-    
-        int currentItem = Integer.parseInt(jTextField2.getText());
-        progress =  currentItem; //add "progress" with user inputted number
-        //for(y=0;y<1;y+=1){
-        //if(progress<=currentItem){
-         //  progress =currentItem;
-           // System.out.println("progress set equal to 1");
-            
-        //}
-        //progress = 0;
-        // return progress;
-        //}
-   
-   
-    double i = progress-1; // i is just for the for-loop
-    numberinputorgvalue = progress-1;
-    //for(numberinputorgvalue=i; numberinput>(numberinput-i); numberinput++){
-        if(progress>numberinputorgvalue+1){
-     for(i=numberinputorgvalue;i<progress;i+=1){
-         
-         System.out.println("well, this is doing things");
-            
-            
-            jTextField2.setText(String.valueOf(progress).indexOf(".") < 0 ? String.valueOf(progress) : String.valueOf(progress).replaceAll("0*$", "").replaceAll("\\.$", ""));
-            jProgressBar1.setValue(--progress);
-            jProgressBar1.setString(progress + "/40");
-            writeOut();
-            
+        if(progress == dataRange - 1){
+            writeDatas();
+            nextButton.setText("Finish");
+            System.out.println("Almost Done");
         }
-     
-    }
+        else if(progress < dataRange){
+            writeDatas();
+            System.out.println("Datas written.");
+        }
         else{
-        progress++;
-        writeOut();
-        System.out.println("it's going to writeOut from next button");
-            
-        }  
-        
-    
-        //}
-// System.out.println("I guess this printed?");
-  //  System.out.println("\n");
+            writeDatas();
+            writeOutFile();
+            System.out.println("Goodbye user.");
+            System.exit(0);
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
@@ -452,61 +422,10 @@ public class mainWindow extends javax.swing.JFrame {
    
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         if(progress > 1){
-            String[] lines;
-            String dataLine = "";
-            String data = "";
-            try (Scanner inputStream = new Scanner(templateFile)){
-
-                dataLine = inputStream.nextLine();
-
-                while(inputStream.hasNext()){
-
-                    data += dataLine + "\n";
-                    System.out.println(data);
-
-                    dataLine = inputStream.nextLine();
-
-                }
-
-                System.out.println("done copy");
-
-            } catch (FileNotFoundException ex) {
-            }
-
-            lines = data.split("\n");
-
-            try {
-
-                    FileWriter  fileWriter = new FileWriter(templateFile, false);
-
-                    fileWriter.write("");
-
-                    fileWriter.close();
-
-                    fileWriter = new FileWriter(templateFile, true);
-
-                    BufferedWriter buffer = new BufferedWriter(fileWriter);
-
-                    PrintWriter printWriter = new PrintWriter(buffer);
-
-                    fileWriter.write("");
-
-                    for(int i = 0; i < lines.length; i++){
-                        printWriter.append(lines[i]);
-                        printWriter.append("\n");
-                    }
-
-                    printWriter.close();
-
-                } catch (IOException ex) {
-                }
-    
-  
-   double currentItem = Double.parseDouble(jTextField2.getText());
-            currentItem--;
-            jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
-            jProgressBar1.setValue(--progress);
-            jProgressBar1.setString(progress + "/40");
+        progress--;
+        jTextField2.setText(String.valueOf(progress));
+        jProgressBar1.setValue(progress);
+        jProgressBar1.setString(progress + "/" + dataRange);
         }
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -586,11 +505,31 @@ public class mainWindow extends javax.swing.JFrame {
         return oneOut;
     }
     
-    private void writeOut(){
+    private void writeOutFile(){
+        try {
+            FileWriter fileOut = new FileWriter(templateFile, false);
+            fileOut.write("");
+            fileOut = new FileWriter(templateFile, true);
+            BufferedWriter writeOut = new BufferedWriter(fileOut);
+            
+            for(int i = 0; i < allData[0].length; i++){
+                writeOut.append(allData[0][i] + "\n");
+            }
+            
+            for(int i = 0; i < dataRange; i++){
+                writeOut.append(allData[1][i]);
+            }
+            
+            writeOut.close();
+            
+        } catch (IOException ex) {
+            System.out.println("File not written.");
+        }
+    }
+    
+    private void writeDatas(){
         
-        
-        
-        while(progress < Double.parseDouble(jTextField2.getText())){
+        while(progress < Integer.parseInt(jTextField2.getText())){
             
             dataText = allData[1][progress - 1];
             dataText = dataText.substring(0, dataText.indexOf(','));
@@ -611,51 +550,6 @@ public class mainWindow extends javax.swing.JFrame {
         jTextField2.setText(String.valueOf(progress));
         jProgressBar1.setValue(progress);
         jProgressBar1.setString(progress + "/" + dataRange);
-        
-        
-//        double loops = Double.parseDouble(jTextField2.getText())+1;
-//        double currentItem = Double.parseDouble(jTextField2.getText());
-//        int currentitem= Integer.parseInt(jTextField2.getText());
-//        int things;
-//        String newOut;
-//        things = ((currentitem))/4;
-//    try {
-//        FileWriter outFile = new FileWriter(templateFile, true);
-//        BufferedWriter outWriter = new BufferedWriter(outFile);
-//        PrintWriter output = new PrintWriter(outWriter);
-//        System.out.printf("%f",currentItem);  //I'm thinking maybe write the value to the file then read it in order to store initial value and current value
-//        while(loops > 0 && progress <= 40){
-//            newOut = compileOutput();
-//            
-//            output.append(newOut);
-//            
-//            //jTextField1.setText(String.valueOf(--loops).indexOf(".") < 0 ? String.valueOf(loops) : String.valueOf(loops).replaceAll("0*$", "").replaceAll("\\.$", ""));
-//          //  if(currentItem>1){
-//           // things= things+(things-things)+1;
-//           //   }
-//            
-//            loops = progress;
-//            progress = things;
-//            progress++;
-//            jTextField2.setText(String.valueOf(currentItem).indexOf(".") < 0 ? String.valueOf(currentItem) : String.valueOf(currentItem).replaceAll("0*$", "").replaceAll("\\.$", ""));
-//            jProgressBar1.setValue(--progress);
-//            jProgressBar1.setString(progress + "/40"); //why would this ever be illegal? you're not adding you're saying to put that string after that number
-//        }
-//        
-//        outWriter.close();
-//        
-//        if(progress > 40)
-//            System.exit(0);
-//        else if(progress == 40){
-//                nextButton.setText("Finish");
-//            }
-//        
-//
-//         } 
-//           catch (IOException ex) {
-//           ex.printStackTrace();
-//           System.out.println("Write failed...");
-//         }
         
         
 
