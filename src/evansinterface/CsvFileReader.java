@@ -16,6 +16,7 @@ public class CsvFileReader {
     
     public CsvFileReader(File fileIn){
         file = fileIn;
+        lines = new String[100];
     }
 
     /**
@@ -49,7 +50,7 @@ public class CsvFileReader {
         
        
    
-        private static void readString() throws FileNotFoundException{
+        private static String[] readString() throws FileNotFoundException{
             
          if(file.exists() != true){
              try{
@@ -132,6 +133,7 @@ public class CsvFileReader {
                    private static String[] rowArray;
                    private static String[][] values;
                    private static File file;
+                   private String[] lines;
     }
     
 
