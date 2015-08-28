@@ -57,9 +57,9 @@ public class mainWindow extends javax.swing.JFrame {
     }
     
     private void getDataRange(){
-        int i = 0;
-        while(allData[1][i] != null){i++;}
-        dataRange = i;
+        int q = 0;
+        while(allData[1][q] != null){q++;}
+        dataRange = q;
     }
       
       
@@ -427,19 +427,10 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox9ActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        if(progress == dataRange - 1){
-            writeDatas();
-            nextButton.setText("Finish");
-            System.out.println("Almost Done");
-        }
-        else if(progress < dataRange){
-            writeDatas();
-            System.out.println("Datas written.");
-        }
-        else{
-            writeDatas();
+        writeDatas();
+        
+        if(progress > dataRange){
             writeOutFile();
-            System.out.println("Goodbye user.");
             System.exit(0);
         }
     }//GEN-LAST:event_nextButtonActionPerformed
@@ -561,12 +552,17 @@ public class mainWindow extends javax.swing.JFrame {
             fileOut = new FileWriter(templateFile, true);
             BufferedWriter writeOut = new BufferedWriter(fileOut);
             
-            for(int i = 0; i < allData[0].length; i++){
-                writeOut.append(allData[0][i] + "\n");
+            for (String allData1 : allData[0]) {
+                writeOut.append(allData1 + "\n");
             }
             
             for(int i = 0; i < dataRange; i++){
                 writeOut.append(allData[1][i]);
+            }
+            
+            for (String allData1 : allData[2]) {
+                if(allData1 != null)
+                    writeOut.append(allData1 + "\n");
             }
             
             writeOut.close();
@@ -577,15 +573,16 @@ public class mainWindow extends javax.swing.JFrame {
     }
     
     private void writeDatas(){
-        
+        if(progress <= dataRange){
         while(progress < Integer.parseInt(jTextField2.getText())){
-            
-            dataText = allData[1][progress - 1];
-            dataText = dataText.substring(0, dataText.indexOf(','));
-            
-            allData[1][progress - 1] = dataText + ",," + progress + newOut;
-            
-            progress++;
+            if(progress < dataRange){
+                dataText = allData[1][progress - 1];
+                dataText = dataText.substring(0, dataText.indexOf(','));
+
+                allData[1][progress - 1] = dataText + ",," + progress + newOut + ",\n";
+
+                progress++;
+            }
         }
         
         dataText = allData[1][progress - 1];
@@ -603,6 +600,11 @@ public class mainWindow extends javax.swing.JFrame {
         jTextField2.setText(String.valueOf(progress));
         jProgressBar1.setValue(progress);
         jProgressBar1.setString(progress + "/" + dataRange);
+        
+        if(progress >= dataRange - 1){
+            nextButton.setText("Finish");
+        }
+        }
    
 }
     
