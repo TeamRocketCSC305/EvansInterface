@@ -43,6 +43,9 @@ public class CsvFileReader {
                 case TANTALUM:
                     arraySelected = 2;
                     break;
+                case GLASSING: //here
+                    arraySelected = 3;
+                    break;
                 default:
                     arraySelected = 0;
                     break;
@@ -54,7 +57,7 @@ public class CsvFileReader {
    
         private static void readString() throws FileNotFoundException{
             
-            values = new String[3][];
+            values = new String[4][];
             int line = 0;
             for(int i = 0; i < values.length; i++){
                 values[i] = new String[]{"-----"};
@@ -71,8 +74,9 @@ public class CsvFileReader {
                     
                     if (data.contains("Serial #")){
                         while(inputStream.hasNext() && !done){ //while reading file and not done
+                            
                         data = inputStream.nextLine(); //go to the next line
-                        System.out.println(data); //printing "false" into the console? why is that essential?
+                        
                         if(data.contains("Entered")){ //stop at the line that reads "Entered"
                             System.out.println("Done Import");
                             done = true; //set done equal to true
@@ -86,21 +90,22 @@ public class CsvFileReader {
                             rowArray[i] = data.split(",")[i];
                         }
                         System.out.print("\n");
+                        System.out.println("Checking value for ANODE");
                         checkDubsAndAdd(10, 0);
-                        System.out.println("Checked value for ANODE");
+                        System.out.println("Checking value for CATHODE");
                         checkDubsAndAdd(15, 1);
-                        System.out.println("Checked value for CATHODE");
+                        System.out.println("Checking value for TANTALUM");
                         checkDubsAndAdd(17, 2);
-                        System.out.println("Checked value for TANTALUM");
+                        System.out.println("Checking value for GLASSING");
+                        checkDubsAndAdd(19, 3);
                         
                         line++;
-                        System.out.println(String.valueOf(line));
+                        System.out.println("Line " + String.valueOf(line) + " checked.");
                         }
                         }
                     }
                     
                     line++;
-                    System.out.println(String.valueOf(line));
                     
                 }
             }
