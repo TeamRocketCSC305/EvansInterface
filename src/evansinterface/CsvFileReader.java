@@ -16,7 +16,7 @@ public class CsvFileReader {
     
     public CsvFileReader(File fileIn){
         file = fileIn;
-        allLines = new String[2][];
+        allLines = new String[3][];
         allLines[0] = new String[17];
         allLines[1] = new String[100];
     }
@@ -138,13 +138,47 @@ public class CsvFileReader {
                 allLines[0][i] = currentLine;
             }
             
-            while(inputNew.hasNext()){
-                currentLine = inputNew.nextLine();
+            currentLine = inputNew.nextLine();
+            
+            while(currentLine.charAt(0) != ','){
                 allLines[1][linePos++] = currentLine;
+                currentLine = inputNew.nextLine();
             }
+            
+            allLines[2] = new String[50];
+            linePos = 0;
+            while(inputNew.hasNext()){
+                if(linePos >= allLines[2].length){
+                    String[] temp = new String[allLines[2].length + 1];
+                    
+                    for(int j = 0; j < allLines[2].length; j++){
+                        temp[j] = allLines[2][j];
+                    }
+                    
+                    allLines[2] = temp;
+                }
+                
+                allLines[2][linePos] = currentLine;
+                currentLine = inputNew.nextLine();
+                
+                linePos++;
+                
+            }
+            
+            if(linePos >= allLines[2].length){
+                    String[] temp = new String[allLines[2].length + 1];
+                    
+                    for(int j = 0; j < allLines[2].length; j++){
+                        temp[j] = allLines[2][j];
+                    }
+                    
+                    allLines[2] = temp;
+                }
+                allLines[2][linePos] = currentLine;
             
             return allLines;
         }
+        
                     
                    private static String[] rowArray;
                    private static String[][] values;

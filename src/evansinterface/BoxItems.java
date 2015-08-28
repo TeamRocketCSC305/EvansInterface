@@ -10,10 +10,10 @@ package evansinterface;
  * @author natehindman
  */
 public enum BoxItems {
-    LOTNUM, ANODE, CATHODE, GLASSING, TANTALUM;
+    ANODE, CATHODE, GLASSING, TANTALUM;
 
     void getText() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
    
 }
