@@ -533,8 +533,6 @@ public class mainWindow extends javax.swing.JFrame {
         oneOut += ",,";
         oneOut += checkNA(jComboBox1.getSelectedItem().toString());
         oneOut += ",,,,,,,,,,";
-        oneOut += jTextField4.getText();
-        oneOut += ",\n";
         return oneOut;
     }
     
@@ -595,7 +593,9 @@ public class mainWindow extends javax.swing.JFrame {
         
         newOut = compileOutput();
         
-        allData[1][progress - 1] = dataText + ",," + progress + newOut;
+        allData[1][progress - 1] = dataText + ",," + progress + newOut + jTextField4.getText() + ",\n";
+        
+        jTextField4.setText("");
         
         anCheck();
         
