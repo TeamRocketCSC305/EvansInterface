@@ -42,12 +42,31 @@ public final class mainWindow extends javax.swing.JFrame {
         jLabel11.setForeground(Color.green);
         jLabel11.setText("No Additional Instructions");
         
-            readcomments();
-        
-        if(templateFile == null){
-            System.exit(0);
+        if(templateFile == null){ // if template file has nothing in it
+            System.exit(0);  // quit application
         }
-            
+        File file = fileSelect.getSelectedFile();  //
+        CSVReader reader = new CSVReader(new FileReader(file));
+        String [] nextLine;
+     //   int returnVal = chooser.showOpenDialog(parent);
+    if(fileSelect.APPROVE_OPTION == 1) {
+       System.out.println("You chose to open this file: " +fileSelect.getSelectedFile().getName());
+    }
+    
+        while ((nextLine = reader.readNext()) != null) { //while the row isn't blank
+        // nextLine[] is an array of values from the line
+//        System.out.println(nextLine[0] + nextLine[1] + "etc...");
+        if(nextLine[0]!=null){  // if there are comments 
+            jLabel11.setForeground(Color.red); //turn jlabel red
+            jLabel11.setText(nextLine[0]);  // show the instructions
+        }
+        else{
+            System.out.println("hitting else and flipping out");
+        }
+     }
+        
+       // readcomments();
+        
         
         
         progress = 1;
@@ -629,19 +648,7 @@ public final class mainWindow extends javax.swing.JFrame {
         }
      
 }
-    void readcomments() throws FileNotFoundException, IOException{
-          File file = fileSelect.getSelectedFile();
-        CSVReader reader = new CSVReader(new FileReader(file+".csv"));
-     String [] nextLine;
-     while ((nextLine = reader.readNext()) != null) { //while the row isn't blank
-        // nextLine[] is an array of values from the line
-        System.out.println(nextLine[0] + nextLine[1] + "etc...");
-        if(nextLine[20]!=null){  // if there are comments 
-            jLabel11.setForeground(Color.red); //turn jlabel red
-            jLabel11.setText(nextLine[20]);  // show the instructions
-        }
-     }
-    }
+    
     
     
 
