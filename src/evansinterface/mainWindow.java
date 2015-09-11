@@ -19,6 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
+import java.util.List;
 
 
 
@@ -32,40 +33,45 @@ import java.io.FileReader;
 public final class mainWindow extends javax.swing.JFrame {
     private Object br;
     
-        
+       int blah = 29; 
         
 
     mainWindow() throws FileNotFoundException, IOException  {
       //  int line =1;
         initComponents();
         templateFile = openFile();
-        jLabel11.setForeground(Color.green);
-        jLabel11.setText("No Additional Instructions");
+        
         
         if(templateFile == null){ // if template file has nothing in it
-            System.exit(0);  // quit application
+          System.exit(0);  // quit application
         }
         File file = fileSelect.getSelectedFile();  //
         CSVReader reader = new CSVReader(new FileReader(file));
         String [] nextLine;
-     //   int returnVal = chooser.showOpenDialog(parent);
-    if(fileSelect.APPROVE_OPTION == 1) {
-       System.out.println("You chose to open this file: " +fileSelect.getSelectedFile().getName());
-    }
+     // int returnVal = chooser.showOpenDialog(parent);
+   // if(fileSelect.APPROVE_OPTION == 1) {
+    //   System.out.println("You chose to open this file: " +fileSelect.getSelectedFile().getName());
     
-        while ((nextLine = reader.readNext()) != null) { //while the row isn't blank
-        // nextLine[] is an array of values from the line
-//        System.out.println(nextLine[0] + nextLine[1] + "etc...");
-        if(nextLine[0]!=null){  // if there are comments 
+    
+        while ((nextLine = reader.readNext()) != null) { 
+       if(nextLine.length==30){
+            //if(nextLine[blah]!=null){  // if there are comments 
             jLabel11.setForeground(Color.red); //turn jlabel red
-            jLabel11.setText(nextLine[0]);  // show the instructions
-        }
-        else{
-            System.out.println("hitting else and flipping out");
-        }
-     }
+            jLabel11.setText(nextLine[blah]);  // show the instructions
+            System.out.println("if blah isn't null");
+       // }
+       }
         
-       // readcomments();
+            if(nextLine.length<30){
+           System.out.println("it's going into null"); 
+            jLabel11.setForeground(Color.green);
+        jLabel11.setText("No Instructions");
+        System.out.println("made it to second if");
+        }
+        
+        
+     }
+    
         
         
         
