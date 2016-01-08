@@ -49,17 +49,17 @@ public final class mainWindow extends javax.swing.JFrame {
         CSVReader reader = new CSVReader(new FileReader(file));
         String [] nextLine;
      // int returnVal = chooser.showOpenDialog(parent);
-   // if(fileSelect.APPROVE_OPTION == 1) {
+    if(fileSelect.APPROVE_OPTION == 1) {
     //   System.out.println("You chose to open this file: " +fileSelect.getSelectedFile().getName());
     
     
         while ((nextLine = reader.readNext()) != null) { 
-       if(nextLine.length==30){
-            //if(nextLine[blah]!=null){  // if there are comments 
+          //  if(nextLine.length==30){
+            if(nextLine[blah]!=null){  // if there are comments 
             jLabel11.setForeground(Color.red); //turn jlabel red
             jLabel11.setText(nextLine[blah]);  // show the instructions
             System.out.println("if blah isn't null");
-       // }
+        }
        }
         
             if(nextLine.length<30){
@@ -96,8 +96,12 @@ public final class mainWindow extends javax.swing.JFrame {
      
     private void getDataRange(){
         int q = 0;
+        int sqlinc = 0;
         while(allData[1][q] != null){q++;}
-        dataRange = q;
+       dataRange = q;
+        //while(allData[3][sqlinc] !=null){sqlinc++;}
+        //datarange1=sqlinc;
+        
     }
       
       
@@ -476,6 +480,7 @@ public final class mainWindow extends javax.swing.JFrame {
         
         if(progress > dataRange){
             writeOutFile();
+            writesql();
             System.exit(0);
         }
     }//GEN-LAST:event_nextButtonActionPerformed
@@ -618,7 +623,36 @@ public final class mainWindow extends javax.swing.JFrame {
             System.out.println("File not written.");
         }
     }
-    
+     private void writesql(){
+        try {
+            File file = fileSelect.getSelectedFile();
+            //FileUtils.readFileToString(fileSelect);
+            String sqlcsv = fileSelect.getName(file);
+            String sqldir = "Z:\\Database Current\\SQL\\"+"sql"+sqlcsv+".csv";
+            FileWriter fileOut = new FileWriter(sqldir, false);
+            fileOut.write("");
+            fileOut = new FileWriter(sqldir, true);
+            BufferedWriter writeOut = new BufferedWriter(fileOut);
+            
+            for (String allData1 : allData[0]) {
+                writeOut.append(allData1 + "\n");
+            }
+            
+            for(int i = 0; i < datarange1; i++){
+                writeOut.append(allData[1][i]);
+            }
+            
+            for (String allData1 : allData[2]) {
+                if(allData1 != null)
+                    writeOut.append(allData1 + "\n");
+            }
+            
+            writeOut.close();
+            
+        } catch (IOException ex) {
+            System.out.println("File not written.");
+        }
+    }
     private void writeDatas(){
         if(progress <= dataRange){
         while(progress < Integer.parseInt(jTextField2.getText())){
@@ -700,6 +734,7 @@ private String[][] allData;
 private String[] topData;
 private String[] enteredData;
 private int dataRange;
+private int datarange1;
 String newOut;
 private final CsvFileReader fileReader;
 boolean changedAn;
